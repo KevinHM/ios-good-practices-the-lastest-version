@@ -9,17 +9,19 @@
 
 ## 为什么写这个文档
 
-iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别处都没有广泛被应用，iOS 这个平台似乎对一切都有一套不同的叫法。当你尝试着在真机上跑程序时难免会磕磕碰碰。这份持续更新的文档就是你的救星！无论你是Cocoa王国的新手，或是老练到只想知道"最佳做法"是什么，这份文档都值得一读。当然，内容仅供参考，你有理由采取不同的做法只要你愿意！
+iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别处都没有广泛被应用，iOS 这个平台似乎对一切都有一套不同的叫法。当你尝试在真机上跑程序时难免会磕磕碰碰。这份持续更新的文档就是你的救星！无论你是Cocoa王国的新手，或是老练到只想知道"最佳做法"是什么，这份文档都值得一读。当然，内容仅供参考，你有理由采取不同的做法只要你愿意！
 
 ## 开始吧！
 
 
 ### Xcode
+
 [Xcode][60]是绝大多数 iOS 开发者选择的 IDE，也是 Apple 唯一一个官方支持的 IDE. 也有一些其他的选择，最著名的可能就是 [AppCode][61]了。但除非你已经对 iOS 游刃有余，否则还是用 Xcode 吧，尽管 Xcode 有一些缺点，但它现在还算是相当实用的！
 
 要安装 Xcode ，只需在 [Mac 的 AppStore][62] 上下载即可。它自带最新版的 SDK 和 iOS 模拟器，其他版本可以在 *Preferences > Downloads*处安装。
 
 ### 创建工程
+
 开始一个新的 iOS 项目时，一个常见的问题是：界面用代码写还是用 Storyboard、xib来画？现有的 App 中两种方式都占有相当的市场。就此我们需要考虑以下几点：
 
 **用代码写界面有啥好处？**
@@ -34,9 +36,11 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
   * 从 iOS8 开始（iOS7 部分兼容），你可以用[SizeClasses][64] 来设计同时支持各种屏幕尺寸的界面，省去了很多重复的工作。
 
 ### gitignore文件
+
 要为一个项目添加版本控制，最好第一步就添加一个恰当的`.gitignore`文件。这样一来不需要的文件(如用户配置、临时文件等)就不会进入 repository（版本仓库）了。可喜的是，Github 已经帮我们准备了 [Objective-C版][65] 和 [Swift版][66]。
 
 ### Cocoapods
+
 如果你准备在工程中引入外部依赖(例如第三方库)，[Cocoapods][67]提供了快速而便捷的集成方法。安装方法如下：
 
 ```
@@ -65,6 +69,7 @@ pod update
 会把所有的 pod 都更新到 Podfile 允许的最新版本。你可以通过一系列的 [语法][69]来准确指定你对版本的要求。
 
 ### 项目结构：
+
 把这些数以百计的源文件都保存在同一目录下，不根据工程结构来构建一个目录结构是无法想象的。你可以使用下面的结构：
 
 ```objective-c
@@ -105,7 +110,7 @@ static NSString * const XYZAwesomenessDeliveredNotificationName = @"foo";
 
 ### 分支模型
 
-App发布的时候把 Release 代码从原有的分支上隔离出来，并且加上适当的tag，是很好的做法，对于向公众分发（比如通过Appstore）的 app 这一点尤其重要。同时，涉及大量 commit 的 feature 应该在独立的分支上完成。 `git-flow` 是一个帮助你遵守这些规则的工具。它只是在 git 的分支和 tag 命令上简单加了一层包装，就可以帮助维护一套适当的分支结构，对于团队协作尤为有用。所有的开发都应该在 feature 对应的分支上完成（小改动在 develop 分支上完成），给 release 打上 app 版本的 tag，然后 commit 到 master 分支时只能用下面这条命令：
+App发布的时候把 Release 代码从原有的分支上隔离出来，并且加上适当的tag，是很好的做法，对于向公众分发（比如通过Appstore）的 app 这一点尤其重要。同时，涉及大量 commit 的 feature 应该在独立的分支上完成。 [`git-flow`](https://github.com/nvie/gitflow) 是一个帮助你遵守这些规则的工具。它只是在 git 的分支和 tag 命令上简单加了一层包装，就可以帮助维护一套适当的分支结构，对于团队协作尤为有用。所有的开发都应该在 feature 对应的分支上完成（小改动在 develop 分支上完成），给 release 打上 app 版本的 tag，然后 commit 到 master 分支时只能用下面这条命令：
 
 `git flow release fininsh <version>`
 
@@ -130,7 +135,7 @@ App发布的时候把 Release 代码从原有的分支上隔离出来，并且�
 
 * [Model-View-Controller-Store][6] (MVCS)
   * 这是苹果默认的架构(MVC)上增加了一个 Store 层，用来吐出 Model， 处理网络请求、缓存等。
-  * 每个 Store 暴露给 View Controller 的或是 `RACSignal`,或是返回值为 `void`、参数带有自定义的 `completion block`的方法。
+  * 每个 Store 暴露给 View Controller 的或是 `RACSignal`,或是返回值为 `void`,参数中带有自定义的 `completion block`的方法。
 
 * [Model-View-ViewModel][7](MVVM)
   * MVVM 是为了解决“巨大的 view controller”而生，它把 UIViewController 的子类看做 View 层的一部分， 用 ViewModel 维护所有的状态来给 ViewController 瘦身。
@@ -150,9 +155,11 @@ App发布的时候把 Release 代码从原有的分支上隔离出来，并且�
 
 
 ### Models
+
 要确保你的 Model 是不可变的，他们用来把远程 API 的语义和类型转换为 App 适用的语义和类型。Github的[Mantle][10]是个不错的选择。
 
 ### Views
+
 在自定义视图中使用 AutoLayout 时，[推荐在初始化方法中创建并激活你的约束][11]。如果你需要动态地改变你的约束，hold住(保留)他们(约束)的引用并在必要的时候关闭或激活他们。
 
 只有在极少数情况下你需要重写 `UIViewController`的`updateViewConstraints`.如果这么做，要记得在View 类中加上：
@@ -189,6 +196,7 @@ FooViewController *fooViewController = [[FooViewController alloc] initWithViewMo
 ## 网络请求
 
 ### 传统方法：使用自定义回调 block
+
 ```objective-c
 //GigStore.h
 typedef void (^FetchGigsBlock)(NSArray *gigs, NSError *error);
@@ -208,6 +216,7 @@ typedef void (^FetchGigsBlock)(NSArray *gigs, NSError *error);
 这样虽可行，但如果要发起几个链式请求，很容易导致回调深渊。
 
 ### Reactive 的方法：使用 RACSignal
+
 如果你身陷回调深渊，可以看看 [ReactiveCocoa(RAC)][19].这是一个多功能、多用途的库，它可以改变[整个 App][20] 的写法。但你也可以仅在适合用它的时候，零散地用一下。
 
 [Teehan+lax][21]以及[NSHipster][22]很好地介绍了 RAC 概念(以及整个 FRP 的概念)。
@@ -519,6 +528,7 @@ Objective-C :
 这样做有一个额外的好处：在有必要时，可以清除掉整个统计分析框架，而 App 其余的部分不受任何影响。
 
 ### Crash Logs 崩溃日志
+
 首先应该让 App 把崩溃日志发送到某个服务器上，这样你才能看得到。可以使用 [PLCrashReporter][45]结合自己的后台实现这个功能，但推荐使用已有的第三方服务，比如下面这些：
 
 * [Crashlytics][46]
