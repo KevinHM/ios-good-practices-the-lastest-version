@@ -214,12 +214,15 @@ Objective-c:
 ### Controllers
 
 要使用依赖注入，也就是说，应该把  controller 需要的数据用参数传进来，而非把所有的状态都保持在单例中。后者仅当这些状态的确是全局状态的情况下才适用。
+
 Swift:
+
 ```swift
 let fooViewController = FooViewController(viewModel: fooViewModel)
 ```
 
 Objective-C
+
 ```objective-c
 FooViewController *fooViewController = [[FooViewController alloc] initWithViewModel:fooViewModel];
 ```
@@ -245,6 +248,7 @@ typedef void (^FetchGigsBlock)(NSArray *gigs, NSError *error);
     }
 };
 ```
+
 这样虽可行，但如果要发起几个链式请求，很容易导致回调深渊。
 
 ### Reactive 的方法：使用 RACSignal
@@ -265,6 +269,7 @@ typedef void (^FetchGigsBlock)(NSArray *gigs, NSError *error);
                             // :(
                         }];
 ```
+
 在这里我们可以把 gig(演出) 信号与其他信号结合，因此可以在展示 gig 之前做一些修改、过滤等处理。
 
 ## 存储
@@ -284,6 +289,7 @@ func fetchGigsForArtist(artist: Artist) -> SignalProducer<[Gig], NSError> {
 ```
 
 ObjectiveC + RAC 2:
+
 ```objective-c
 - (RACSignal *)fetchGigsForArtist:(Artist *)artist {
     //...
@@ -311,6 +317,7 @@ IconCheckmarkHighlighted-568@2x~iPhone.png // iPhone, Retina, 4-inch
 IconCheckmarkHighlighted~iPad.png // iPad, non-Retina
 IconCheckmarkhighlighted@2x~iPad.png // iPad, Retina
 ```
+
 其中的 `-568h`、`@2x`、`~iPhone`以及`~iPad`这些标示符本省并不是必需的，但如果在文件名里加上它们，把文件拖动到  asset 时就能自动落到正确的"格子"上，因此能避免难以察觉的错误拖放。
 
 ### Using Vector Images 使用矢量图
@@ -386,6 +393,7 @@ class FooViewController : UIViewController, FoobarDelegate {
 }
 
 ```
+
 Objective-c Mark风格：
 
 ```objective-c
