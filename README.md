@@ -483,8 +483,10 @@ Futurice（作者所在的公司）并没有公司范围的编码风格指南。
 
 建议把编译警告都打开，并且像对待 error 一样对待 warning。[这份幻灯片][32]论证了这一点。幻灯片里同时还讲到了如何在特定文件或特定代码段中忽略特定的 warning。
 一句话，在 build setting 的 "Other Warning Flags"中至少要加入以下两个值：
+
 * `-Wall` （开启非常多的额外的 warning）
 * `-Wextra` （开启许多额外的 warning）
+
 同时打开 build setting 里的 "<u>*Treat warnings as errors*</u>"
 
 ### Clang静态分析器
