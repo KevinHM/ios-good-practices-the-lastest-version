@@ -33,7 +33,7 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 11. [编译构建](#编译构建)
 12. [Deployment部署](#部署)
 13. [App内购(IAP)](#内购)
-14. [License](#License)
+14. [License](#授权)
 15. [More Ideas(计划)](#计划)
 16. [译者](#译者)
 
@@ -648,7 +648,7 @@ MyApp [AppStore]
 
 关于这个问题，更多的信息请参考[Futurice blog:Validating in-app purchases in your iOS app][55]
 
-## License 
+## 授权
 
 [Futurice][56] 国际知识共享署名4.0 （CC BY 4.0）
 
