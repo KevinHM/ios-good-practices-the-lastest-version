@@ -153,7 +153,7 @@ App发布的时候把 Release 代码从原有的分支上隔离出来，并且�
 99.95% 的 iOS 开发者使用这个库，当 NSURLSession 自己本身也非常完善的时候， AFNetworking 仍然能凭借很多 App 需求的队列请求管理能力立于不败之地。
 
 #### DateTools 日期工具
-总的来说，[不要自己计算日期][72]。DateTools 是一个经过彻底测试的开源库，你可以放心使用它来做这种事情。
+总的来说，[不要自己计算日期][72]。[DateTools][75] 是一个经过彻底测试的开源库，你可以放心使用它来做这种事情。
 
 #### Auto Layout 库
 如果你更喜欢用代码写界面，你会用过 Apple 难用的 `NSLayoutConstraint`的工厂方法或者 [`Visual Format Language`][2]。前者很啰嗦，后者基于字符串不利于编译检查。
@@ -758,3 +758,4 @@ MyApp [AppStore]
 [72]: https://www.youtube.com/watch?v=-5wpm-gesOY
 [73]: https://github.com/DaiYue/iOS-good-practices-in-Chinese
 [74]: https://github.com/DaiYue
+[75]: https://github.com/MatthewYork/DateTools
