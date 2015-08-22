@@ -650,7 +650,7 @@ MyApp [AppStore]
 
 ## 授权
 
-[Futurice][56] 国际知识共享署名4.0 （CC BY 4.0）
+[Futurice][56] 知识共享国际署名4.0 （CC BY 4.0）
 
 ## 计划
 
