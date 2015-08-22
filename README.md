@@ -202,7 +202,7 @@ override class func requiresConstraintBasedLayout() -> Bool {
 }
 ```
 
-Objective-c:
+Objective-C:
 
 ```objective-c
 + (BOOL)requiresConstraintBasedLayout {
@@ -288,7 +288,7 @@ func fetchGigsForArtist(artist: Artist) -> SignalProducer<[Gig], NSError> {
 }
 ```
 
-ObjectiveC + RAC 2:
+Objective-C + RAC 2:
 
 ```objective-c
 - (RACSignal *)fetchGigsForArtist:(Artist *)artist {
@@ -394,7 +394,7 @@ class FooViewController : UIViewController, FoobarDelegate {
 
 ```
 
-Objective-c Mark风格：
+Objective-C MARK风格：
 
 ```objective-c
 #import "someModel.h"
