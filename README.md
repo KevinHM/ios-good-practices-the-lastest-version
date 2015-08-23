@@ -670,7 +670,7 @@ MyApp [AppStore]
 
 ## 授权
 
-[Futurice][56] 署名 - 相同方式共享 4.0 国际（CC BY 4.0）
+[Futurice][56] 署名 - 相同方式共享 4.0 国际许可协议（CC BY 4.0）
 
 ## 计划
 
