@@ -681,8 +681,8 @@ MyApp [AppStore]
 
 ## 译者
 
-[KevinHM][57],喜欢类似这种项目就 Follow 他吧，更多精彩将分享给您！
-文档的翻译也参考了[Dai Yue][74]早期的版本[iOS-good-practices-in-Chinese][73],非常感谢大神卓越的工作！
+[KevinHM][57],喜欢就 Follow 吧，更多精彩将分享给您！
+文档的翻译也参考了[Dai Yue][74]早期的版本[iOS-good-practices-in-Chinese][73]！
 
 [1]: https://speakerdeck.com/hasseg/localization-practicum
 [2]: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH3-SW1
