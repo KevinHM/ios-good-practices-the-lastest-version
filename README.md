@@ -1,6 +1,7 @@
 
-跟随iOS开发技术发展的潮流，我将持续维护本文档的中文版，如果你喜欢这个译本，也请给个 Star 鼓励下~~
-本文档的[英文原版在这里](https://github.com/futurice/ios-good-practices)，感谢[Futurice](https://github.com/futurice)团队卓越的工作，为我们提供这么优质的文档。
+&nbsp;&nbsp;跟随iOS开发技术发展的潮流，我将持续维护本文档的中文版，如果你喜欢这个译本，也请给个 Star 鼓励下~~
+
+&nbsp;&nbsp;本文档的[英文原版在这里](https://github.com/futurice/ios-good-practices)，感谢[Futurice](https://github.com/futurice)团队卓越的工作，为我们提供这么优质的文档。
 
 > 知识是人类进步的阶梯
 
@@ -681,8 +682,9 @@ MyApp [AppStore]
 
 ## 译者
 
-[KevinHM][57],喜欢就 Follow 吧，更多精彩将分享给您！
-文档的翻译也参考了[Dai Yue][74]早期的版本[iOS-good-practices-in-Chinese][73]！
+&nbsp;&nbsp;[**KevinHM**][57]，喜欢就 Follow 吧，更多精彩将分享给您！
+
+&nbsp;&nbsp;文档的翻译也参考了[iOS-good-practices-in-Chinese][73]!
 
 [1]: https://speakerdeck.com/hasseg/localization-practicum
 [2]: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH3-SW1
