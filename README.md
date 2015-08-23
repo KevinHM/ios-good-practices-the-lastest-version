@@ -675,8 +675,8 @@ MyApp [AppStore]
 
 ## 计划
 
-* 添加一个常用的编译警告列表
-* 问 Jenkins 一些关于自动构建的技术信息
+* 添加常用的编译警告
+* 添加如何使用[Jenkins][76]自动化打包分发
 * 添加一个跟测试相关的小节
 * 添加注意事项
 
@@ -761,3 +761,4 @@ MyApp [AppStore]
 [73]: https://github.com/DaiYue/iOS-good-practices-in-Chinese
 [74]: https://github.com/DaiYue
 [75]: https://github.com/MatthewYork/DateTools
+[76]: https://github.com/jenkinsci/jenkins
