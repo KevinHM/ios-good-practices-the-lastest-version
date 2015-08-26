@@ -1,4 +1,3 @@
-.DS_Store
 
 # Xcode
 #
@@ -43,3 +42,4 @@ xcuserdata
 # Carthage/Checkouts
 
 Carthage/Build
+.DS_Store
