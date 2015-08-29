@@ -56,13 +56,18 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 * Storyboard 的 XML 结构很复杂，所以如果用 Storyboard ，合并代码时很容易冲突，比起用代码来写，麻烦许多。
 * 用代码更容易构建和复用视图，从而使你的代码库更容易遵循 [(Don't Repeat Yourself)DRY原则][63]
 * 用代码可以让所有的信息都集中在一处。但使用 Interface Builder 你得到处找对应的检查器，作死地各种点，才能找到你要设置的属性！
+* Storyboards introduce coupling between your code and UI ,which can lead to crashes e.g. when an outlet or action is not set up correctly. Thest issues are not detected by the compiler.
 
 **用 Storyboard 画界面有啥好处？**
 
 * 对技术不太熟悉的人也可以画：调整颜色、布局约束等等，为项目作出直接贡献。不过做这些时，需要工程已经建好并了解一些基本的知识。
 * 开发迭代更快，因为不需要 build 工程就能预览到作出的改动，所见及所得：
-  * Xcode 6中，在Storyboard里终于能看到自定义的字体和 UI 控件的样式了。这让你在设计时能更好地了解界面的最终外观。
-  * 从 iOS8 开始（iOS7 部分兼容），你可以用[SizeClasses][64] 来设计同时支持各种屏幕尺寸的界面，省去了很多重复的工作。
+  * 自定义字体和 UI 控件在 Storyboard 中所见即所得 。这让你在设计时能更好地了解界面的最终外观。
+  * 使用[SizeClasses][64](iOS 8开始有效)，Interface Builder (界面生成器)为你提供了一个实时的布局预览你所选择的设备，包括 iPad 的分屏多任务处理。
+
+**为什么不同时使用两者？**
+
+为了结合两者之间的优点，你也可以采用一种混合的方法：使用 Storyboard 绘制最初的设计，对于时不时要做出改变修修补补来说非常合适，你甚至可以邀请设计师参与到这个过程中来。当 UI 的设计更为成熟和可靠时，你再过度到代码层进行配置，这有利于相互合作及代码的维护。
 
 ### gitignore文件
 
@@ -187,13 +192,17 @@ App发布的时候把 Release 代码从原有的分支上隔离出来，并且�
 
 ### Models
 
-要确保你的 Model 是不可变的，他们用来把远程 API 的语义和类型转换为 App 适用的语义和类型。Github的[Mantle][10]是个不错的选择。
+要确保你的 Model 是不可变的，他们用来把远程 API 的语义和类型转换为 App 适用的语义和类型。对Objective-C来说 Github的[Mantle][10]是个不错的选择。在 Swift 中，你可以使用 structs 而非 classes 来确保其不可变性，并使用一个类似 [SwiftyJSON][77]或者 [Argo][78]的解析库来做 JSON - Model 之间的转换。
 
 ### Views
 
+今天 Apple 生态系统中丰富的屏幕尺寸及分屏多任务 iPad 的问世，使得设备和它的构成形式之间的界限越来越模糊。就像今天的网站要预先适配不同的窗口尺寸一样，你的 App 也应该以一种优雅的方式来处理各种屏幕的尺寸变化。用户旋转设备或者在你的 App 旁边滑动第二个 iPad App 时(分屏多任务)，这种需求简直是必须的。
+
+你应该使用[size classes][64]和 AutoLayout 来申明你的视图约束，而不是直接操作视图的 frame。基于这些约束规则，系统将为视图 计算合适的 frame 并在环境改变时(切换设备或者分屏展示等)重新计算他们。
+
 在自定义视图中使用 AutoLayout 时，[推荐在初始化方法中创建并激活你的约束][11]。如果你需要动态地改变你的约束，hold住(保留)他们(约束)的引用并在必要的时候关闭或激活他们。
 
-只有在极少数情况下你需要重写 `UIViewController`的`updateViewConstraints`.如果这么做，要记得在View 类中加上如下代码：
+只有在极少数情况下你需要重写 `UIViewController`的`updateViewConstraints`.如果这么做，要记得指定你的视图支持基于约束的布局，添加如下代码即可：
 
 Swift：
 
@@ -762,3 +771,5 @@ MyApp [AppStore]
 [74]: https://github.com/DaiYue
 [75]: https://github.com/MatthewYork/DateTools
 [76]: https://github.com/jenkinsci/jenkins
+[77]: https://github.com/SwiftyJSON/SwiftyJSON
+[78]: https://github.com/thoughtbot/Argo
