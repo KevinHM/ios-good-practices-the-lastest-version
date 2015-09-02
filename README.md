@@ -200,8 +200,6 @@ App发布的时候把 Release 代码从原有的分支上隔离出来，并且�
 
 你应该使用[size classes][64]和 AutoLayout 来申明你的视图约束，而不是直接操作视图的 frame。基于这些约束规则，系统将为视图 计算合适的 frame 并在环境改变时(切换设备或者分屏展示等)重新计算他们。
 
-在自定义视图中使用 AutoLayout 时，[推荐在初始化方法中创建并激活你的约束][11]。如果你需要动态地改变你的约束，hold住(保留)他们(约束)的引用并在必要的时候关闭或激活他们。
-
 Apple [在设置布局约束的推荐方法中][wwdc-autolayout-mysteries]推荐在初始化方法中创建并激活你的布局约束.如果你需要动态地改变某些约束，hold 住他们的引用并在必要的时候关闭或激活他们。这主要用于在你想要系统执行批量更新以获取更好性能的时候, 执行 `UIView` 的 `updateConstraints` (或者它对应的 `UIViewController` 的 `updateViewContraints` )。但这样做的代价是你需要调用 `setNeedsUpdateConstraints` 方法, 这会增加代码的复杂性。
 
 如果你在自定义的视图中重写 `updateConstraints`,你应该明确指出你的视图支持基于约束的布局:
