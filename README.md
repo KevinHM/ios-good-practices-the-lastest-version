@@ -56,7 +56,7 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 * Storyboard 的 XML 结构很复杂，所以如果用 Storyboard ，合并代码时很容易冲突，比起用代码来写，麻烦许多。
 * 用代码更容易构建和复用视图，从而使你的代码库更容易遵循 [(Don't Repeat Yourself)DRY原则][63]
 * 用代码可以让所有的信息都集中在一处。但使用 Interface Builder 你得到处找对应的检查器，作死地各种点，才能找到你要设置的属性！
-* Storyboards introduce coupling between your code and UI ,which can lead to crashes e.g. when an outlet or action is not set up correctly. Thest issues are not detected by the compiler.
+* 代码和 UI 通过 Storyboard 进行耦合可能会导致崩溃，比如一个 IBoutlet 或者 IBAction 没有被正确设置时。类似这种问题编译器可没法检测。
 
 **用 Storyboard 画界面有啥好处？**
 
