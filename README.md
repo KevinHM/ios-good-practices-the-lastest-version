@@ -36,7 +36,8 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 13. [App内购(IAP)](#内购)
 14. [License](#授权)
 15. [More Ideas(计划)](#计划)
-16. [译者](#译者)
+16. [Issues备忘录](#备忘录) 
+17. [译者](#译者)
 
 ## 开始吧！
 
@@ -691,11 +692,184 @@ MyApp [AppStore]
 * 添加一个跟测试相关的小节
 * 添加注意事项
 
+## 备忘录
+
+### 组织项目文件目录的一点建议
+
+#### [jpmcgione](https://github.com/jpmcglone)的建议
+在之前的指南中，项目的目录结构是这样的：
+
+```
+|- Models
+|- Views
+|- Controllers (or ViewModels, if your architecture is MVVM)
+|- Stores
+|- Helpers
+```
+我发现随着 App 的业务量越来越大，特别是当你在多个顶级目录中嵌套具有共同任务特性的文件目录 (如：Views/Login { LoginHeaderView.swift } 和 Controllers/Login/{ LoginViewController.swift })时，我特别推荐下面这样的目录结构：
+
+```
+|- Models
+|- Application // Not common views or controls, etc.
+    |- Main
+    |- Context A
+    |- Context B
+|- Common
+    |- Views/Controls
+    |- Extensions
+    |- Context X
+|- Assets
+```
+
+举个栗子：
+
+```
+|- Models
+    |- User.swift // user model
+    |- Post.swift // post model
+|- Application
+    |- Main
+        |- AppDelegate.swift
+        |- MainViewController.swift // Maybe your app is wrapped in a main view controller, could be a tab bar controller subclass, or some custom view controller that has the neat functionality
+    |- Login
+        |- LoginManager.swift // business logic. A sington that any controller in the app can interact with
+        |- LoginViewController.swift // view controller
+        |- LoginHeaderView.swift // a view that only belongs to login
+    |- Feed
+        |- FeedViewController.swift
+        |- FeedTableViewCell.swift
+    |- Common
+        |- Controls
+            |- BouncingButton.swift
+        |- Extensions
+            |- UIView+Additions.swift //useful addtions to UIView
+            |- NSURL+Additions.swift //useful addtions to NSURL
+|- Assets
+    |- Images.xcassets
+    |- Sounds
+        |- success.wav
+    |- Videos
+        |- intro-onboarding.mp4
+```
+
+^ 文件结构浅，突出程序上下文的内容(及一个功能模块会放在一个文件下，或许当这个功能模块所涉及的Views 或 Manager 比较多时 也可以在当前文件目录下追加嵌套一个 Views/ 或者 Manangers/ 类似的目录 )
+
+现在再用你所提出的目录结构来做同样的布局，比较一下：
+
+```
+|- Models
+    |- User.swift
+    |- Post.swift
+|- Views
+    |- Login
+        |- LoginHeaderView.swift
+    |- Feed
+        |- FeedTableViewCell.swift
+    |- Common
+        |- Controls
+            |- BouncingButton.swift
+|- Controllers (or ViewModel, If your architecture is MVVM)
+    |- Login
+        |- LoginViewController.swift
+    |- Feed
+        |- FeedViewController.swift
+|- Stores
+|- Helpers
+    |- Manangers
+        |- LoginMananger.swift
+    |- Extensions
+        |- UIView+Additions.swift
+        |- NSURL+Additions.swift
+```
+^ 这个文件目录结构很深，显得有点多余。突出了程序的 Class 类型。
+
+不是很确定你的模型中 Assets 资源目录放在何处，但可以想象这跟我的存放位置差不多。
+
+无论是在一个大的团队里面协作，还是团队刚开始很小但迅速发展成一个大团队，我所推荐的结构都更易于管理。
+
+我所推荐的目录结构还有一些额外的优势：
+
+* 与通过 "用心"地排列文件相比，这种结构更容易理解项目中所有的一切。
+
+> 对我而言，它是以项目或以文件类型(在这种情况下，模型、视图控制器)来组织的一些差别。想象一下你正在准备一个演讲，这个演讲稿包含一个 .doc ，一个 .ppt 还有一个 .pdf 文件，但你没有把它们都放在一个叫做"给CEO演讲的重要文件"的文件夹下，而是把它们分别放在3个文件夹下面(Documents, Powerpoint, PDF)的子文件夹 ("给 CEO 演讲的重要文件")中。实际上我们从来不会这么处理，在每一个我们创建的其他项目中(指生活中的一些行为)，我们按照内容而非类型来组织。那么对 App 来讲，为什么我们不这样做呢?(显然我们没有理由不这么做~)
+
+* 项目文件的合并冲突可能性会更少。
+
+> 如果队员正在修改 login 而你正在修改 feed，在我的模板中，你不太可能添加文件到对方的文件目录中。然而，在你的模型中，我们却不得不这么做。相对于每一个功能特性而言，都意味着我们可能添加文件到 Models, Controllers, Views等等，满满的都是合并冲突的机会啊！
+
+你所倡导的模型让有 Ruby on Rails 背景的我想到一个问题：你有 web 前端开发的背景吗？
+
+**补充说明**
+
+Oh! 在你的模型中，你仍然可以轻松地搜索你的 Models, Views 或者 ViewControllers 如果你使用一个通用的命名规范的话。
+
+如：
+
+将所有的 models 命名为类似 UserModel.swift 和 PostModel.swift
+
+ViewControllers 命名为类似 LoginViewController
+
+Manangers 命名为类似 LoginManager
+
+非视图控制器命名为类似 FeedController
+
+分类扩展命名为类似 'aClass'+Additions
+
+在 Xcode 的左下角的文件搜索框中键入 'Model', 'ViewController' 或者 '+Additions' 应该可以缩小搜索范围来找出相似的文件。
+
+#### [mkauppila](https://github.com/mkauppila)评价
+
+非常享受你对自己所建议的项目文件目录组织的全方位的解说，非常棒！
+
+实际上，在一些项目中我使用了相似的面向上下文(context-oriented)的目录结构而且非常好用。我赞同将文件按照他们的上下文而非他们的类型来组织。至少对我而言，当功能特质类似的文件都存放在一个文件目录下时,在 Xcode (或者 AppCode )中工作起来会更加简单.它大大减少了鼠标点击'打开'/'关闭'IDE中的组文件夹的频率。此外，它也有助于将彼此的功能模块的概念分得更加清晰。
+
+虽然我确实发现，举例来说，如果一个视图被多个上下文共用，把它放在一个名为 common 的组文件夹中有一点尴尬，主要是因为很难有足够的理由来说明它到底会被用在何处。但这是不可避免的，虽然在实践中我已经注意到它所带来的小小的不便。
+
+我很乐于添加这个项目文件目录结构到这个文档中。对我而言，比起现在文档中所倡导的方式，它是更好的实践。@richeterre 你认为呢？
+
+#### jpmcgione 回复
+
+谢谢评价！
+
+是啊，我在浏览一些"最佳实践"的开源库并搜索了很多 blog 文章及相关资料，因为我真的想组建一个自己的最佳实践。我看到许多项目采用了这个'最佳实践'的建议(采用了诸如:views, models, controllers 作为顶级文件目录)，而我刚好在使用其他方式来组织文件目录时获得了更好的体验。
+
+但我必须说，整体上我爱这个指南:D 有很多非常棒的技巧，特别是对刚刚进入 iOS 开发领域的团队或个人来说。
+
+#### [erikjalevik](https://github.com/erikjalevik) 评论
+
+哈哈 @jpmcglone ，见证奇迹的时刻！刚好在几天之前我与我亲爱的同事 @richeterre 对这个问题有过激烈的争论，我主张类似你这样的以上下文为基础来组织文件的目录结构。你在这里提供了一些无与伦比的银弹~
+
+我认为最容易出问题的是那些可复用的文件，但你在这里提出的解决方案似乎是一个可行的折衷的办法。在当前的项目中，我们正在向更加类似于 VIPER 架构的方向迁移，这意味着每一个功能特性(上下文亦或模块)都会被包含：
+
+```
+FeatureView
+FeatureViewController
+FeaturePresenter
+FeatureInteractor
+FeatureDataManager (still working on a better name for this component)
+```
+
+在这种情况下，基于上下文的树状结构就更有道理了。
+
+(我有一点暗暗地怀疑，我陷入了严重依赖于利用 Cmd+Shift+O 组合键查找文件的最主要原因可能是我们的目录组织方案所造成的。。。)
+
+#### 项目主要负责人之一的[richeterre](https://github.com/richeterre)回复
+
+首先，非常感谢你建议  @jpmcglone ！我同意当你以任何形式创建功能分组时，我们目前提出的这套目录结构是没有意义的。然而，在一些项目中我们简单地将所有的 views （或者 view models, helpers ...）归纳起来而没有使用更深一层的子目录。我们将所有的这些组链接到硬盘上对应的文件夹，避免所有的文件处在同一个文件目录下。你怎么处理这个的？
+
+不管怎样，看来我们现在真得在一个项目中好好试试你的建议，并在之后在文档中更新我们的研究结果。
+
+点赞 +1
+
+#### jpmcglone 回复
+
+@richeterre Ah，只有一层深吗。那很有意思！我想它简化了一点(相对于我之前的描述而言)。
+
+你要去试一试我这一套结构，那真是太酷了。我期待着你的汇报:D。我的所有项目都是这样做的，我发现合并多个分支而没有一个合并冲突的感觉真是太棒了。我希望它能够带给你同样的感受！
+
 ## 译者
 
 &nbsp;&nbsp;[**KevinHM**][57]，喜欢就 Follow 吧，更多精彩将分享给您！
-
-&nbsp;&nbsp;文档的翻译也参考了[iOS-good-practices-in-Chinese][73]!
 
 [1]: https://speakerdeck.com/hasseg/localization-practicum
 [2]: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH3-SW1
@@ -769,7 +943,6 @@ MyApp [AppStore]
 [70]: https://developer.apple.com/library/prerelease/ios/documentation/MacOSX/Conceptual/BPInternational/StringsdictFileFormat/StringsdictFileFormat.html
 [71]: http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
 [72]: https://www.youtube.com/watch?v=-5wpm-gesOY
-[73]: https://github.com/DaiYue/iOS-good-practices-in-Chinese
 [74]: https://github.com/DaiYue
 [75]: https://github.com/MatthewYork/DateTools
 [76]: https://github.com/jenkinsci/jenkins
