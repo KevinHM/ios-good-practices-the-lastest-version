@@ -596,6 +596,15 @@ Objective-C :
  
 ## 编译构建
 
+本节包含了关于这个主题的概述 --- 更全面的信息请参阅这里：
+
+[iOS Developer Library: Xcode Concepts][apple-xcode-concepts]
+
+[Samantha Marshall: Managing Xcode][pewpew-managing-xcode]
+
+[apple-xcode-concepts]: https://developer.apple.com/library/ios/featuredarticles/XcodeConcepts/
+[pewpew-managing-xcode]: http://pewpewthespells.com/blog/managing_xcode.html
+
 ### 编译配置
 
 即使最简单的 App 也有不同的构建方式。 Xcode 提供的最基本的区别是*Debug*和*Release*模式。后者的编译时优化要强很多，代价是损失了 Debug 的可能性。苹果建议你开发时使用 *Debug*模式，提交到 AppStore 的包用 *Release*模式编译。默认的模式（在 Xcode 里的运行/停止按钮旁边的下拉菜单可以更改）就是这么设置的，Run 用 *Debug*， Archive 用 *Release*。
