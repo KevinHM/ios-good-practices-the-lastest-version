@@ -13,7 +13,9 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 
 # [Swift 社区的最佳实践](./Swift-Best-Practices.md)
 
-使用 Swift 进行软件开发的最佳实践. 本文档的[英文版在这里][SwiftCommunityBestPractices],感谢[Swift社区][SwiftCommunity](频道为 #bestpractices )为我们提供如此优质的文档。
+使用 Swift 进行软件开发的最佳实践. 
+
+本文档的[英文版在这里][SwiftCommunityBestPractices],感谢[Swift社区][SwiftCommunity](频道为 #bestpractices )为我们提供如此优质的文档。
 
 这个文档的产生得益于[作者][Author]在创作[Swift Graphics][SwiftGraphics]时做的一系列的手记。本指南中的大部分建议也考量了是否可以为其它的观点和论点。当然，感觉其他的方法必须存在时除外。
 

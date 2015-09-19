@@ -1,7 +1,12 @@
 
 # Swift 最佳实践
 
-使用 Swift 进行软件开发的最佳实践
+使用 Swift 进行软件开发的最佳实践.
+
+本文档的[英文版在这里][SwiftCommunityBestPractices],感谢[Swift社区][SwiftCommunity](频道为 #bestpractices )为我们提供如此优质的文档。
+
+[SwiftCommunityBestPractices]: https://github.com/schwa/Swift-Community-Best-Practices
+[SwiftCommunity]: http://swift-lang.schwa.io/
 
 
 ## 前言
