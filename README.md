@@ -3,7 +3,7 @@
 跟随iOS开发技术发展的潮流，我将持续维护本文档的中文版，如果你喜欢这个译本，也请给个 Star ~~
 
 
-# [iOS开发的最佳实践](./iOS-Good-Practices.md)
+# [iOS 开发的最佳实践](./iOS-Good-Practices.md)
 
 本文档的[英文原版在这里](https://github.com/futurice/ios-good-practices)，感谢[Futurice](https://github.com/futurice)团队卓越的工作，为我们提供这么优质的文档。
 
