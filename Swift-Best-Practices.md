@@ -11,7 +11,7 @@
 
 ## 前言
 
-这个文档的产生得益于我在创作[Swift Graphics][SwiftGraphics]时做的一系列的札记。本指南中的大部分建议也考量了是否可以为其它的观点和论点。当然，感觉其他的方法必须存在时除外。
+这个文档的产生得益于我在创作[Swift Graphics][SwiftGraphics]时做的一系列的手记。本指南中的大部分建议也考量了是否可以为其它的观点和论点。当然，感觉其他的方法必须存在时除外。
 
 [SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
 
@@ -214,7 +214,7 @@ class Person {
 
 ### 实例的转换
 
-将一种类型的实例转换为到另一种类型实例时,`init()`方法：
+将一种类型的实例转换为到另一种类型实例时的`init()`方法：
 
 ```Swift
 extension NSColor {
@@ -224,7 +224,7 @@ extension NSColor {
 }
 ```
 
-现在在 Swift 标准库中将一个类型的实例转换为另一个类型的实例， `Init` 方法似乎是首选的方式。
+现在在 Swift 标准库中实现这种转换 `init` 方法似乎是首选。
 
 "to" 方法是另一种合理的方法(虽然你应该遵循 Apple 的指引使用 `init` 方法)。
 
@@ -261,7 +261,7 @@ Swift 的 runtime 将确保以一种线程安全的方式来创建和访问单�
 
 单例一般仅通过 `sharedInstance` 静态属性来访问，除非你有一个令人信服的理由不把它命名为 `sharedInstance`。不要使用静态函数或者全局函数来访问单例。
 
-( 因为在 Swift 中生成单例是如此简单，并且因为统一的命名为您节省了大量的时间，您将有更多的时间去抱怨单例如何如何 '反模式' 并且应该不惜一切代价避免使用。您的开发伙伴们会感激你的。)
+( 因为在 Swift 中生成单例是如此简单，并且因为统一的命名为您节省了大量的时间，您将有更多的时间去抱怨单例如何如何 '反模式' 并且应该不惜一切代价避免使用。您的开发伙伴们会感激你的 <译者注:反话?> 。)
 
 ### 代码组织的扩展
 
@@ -363,42 +363,46 @@ someNecessaryOperation(criticalValue!)
 
 即使你没有捕捉值( `guard let` ),这种模式也会在编译时强制执行提前退出。在第二个(不推荐的) `if` 例程中，虽然代码扁平得跟 `guard` 一样，但一个致命错误或其他返回的一些非退出操作无意中的改变将导致崩溃 (亦或状态无效，这取决于确切的情况)。从一个 guard 申明的 `else` block 中移除提前退出将会立即显示错误(编译器提示错误)。
 
-### "Early" Access Control
 
-Even if your code is not broken up into independent modules, you should always be thinking about access control. Marking a definition as "private" or "internal" can act as lightweight documentation for your code. Anyone reading the code will know that these elements are "hands off". Conversely, marking a definition as "public" is an invite for other code to access the marked elements. It is best to be explicit and not rely on Swift's default access control level ("internal").
+### "超前地" 控制访问权限
 
-If your codebase grows in the future, it may end being broken down into sub-modules. Doing so on a codebase already decorated with access control information is much quicker and easier.
+即使你的代码没有分解为各个独立的模块，你也应该总是考虑其访问控制。标记一个定义为 "`private`" 或者 "`internal`" 可以轻量化代码文档。任何阅读这代码的人将知道这些元素是可以暂时放一边不予考虑的。相反，标记一个定义为 "`public`"就表明其他的代码可以访问这个标记元素。最好能有明确的指示而非依赖 Swift 的默认访问权限 ("`internal`")。
 
-### "Restrictive" Access Control
+如果你的代码库慢慢膨胀，最终它可能被拆分为 N 个子模块。(而拆分为 N 个子模块这种工作如果)在一个已经分配了访问控制权限信息的代码库上做会更快更容易。
 
-It is generally better to be overly restrictive when adding access control to your code. Where it makes sense prefer "private" definitions to "internal", and prefer "internal" to "public" (note: "internal" is the default).
 
-It is far easier to change the access control of your code to be more permissive later (along the spectrum: "private" to "internal" to "public") as needed. Code that is has too permissive access control might be used inappropriately by other code. Making code more restrictive could involve finding the inappropriate or incorrect uses and providing better interfaces. This is a trying to close the stable door after the horse has bolted style problem. An example of this could be a type exposing an internal cache publicly.
+### "限制性地" 控制访问
 
-Furthermore, restricting access to code limits the "exposed surface area" and allows the code to be refactored with less chance of impacting other code. Other techniques such as "Protocol Driven Development" can also help.
+在感觉使用 "`private`" 好过 "`internal`" ，或使用 "`internal`" 比 "`public`" 更合适的时，给代码添加更严格的访问控制权限通常会更好。
 
-## TODO Section
+这将使得之后放宽代码的访问控制权限变得更容易(权限从窄到宽: "`private`" ---> "`internal`" ---> "`public`")。代码的访问控制权限如果放得太宽就有可能会被其他的代码不恰当地使用。给代码更严格的访问控制能够排除一些不恰当或不正确的调用从而提供出更好的接口。这是一种在天马行空之后关上一扇稳定之门的风格尝试。公开地暴露一个内部缓存正是这方面的一个例子。
 
-This is a list of headings for possible future expansion.
+此外，限制代码的访问权限可以限制 "曝光面积" 并且代码在重构时对其他代码的影响更少。另外的技术像 "协议驱动开发" 也能提供帮助。
 
-### Protocols & Protocol Driven Development
+## TODO sections
 
-### Implicitly Unwrapped Optionals
+将来可能会展开讨论的一系列主题。
 
-### Reference vs Value Types
+### 协议 & 协议驱动开发
 
-### Async Closures
+### 隐式 Unwrapped Optionals
 
-### `unowned` vs `weak`
+### 参考 VS 值类型
+
+### 异步闭包
+
+### `unowned` VS `weak`
 
 ### Cocoa Delegates
 
-### Immutable Structs
+### 不可变的结构体
 
-### Instance Initialisation
+###  实例初始化
 
-### Logging & Printing
+### 日志与打印
 
-### Computed Properties vs Functions
+### 计算属性 vs 功能
 
-### Value Types and Equality
+### 值类型和相等性
+
+
