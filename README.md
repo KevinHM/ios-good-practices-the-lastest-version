@@ -2,6 +2,8 @@
 
 跟随iOS开发技术发展的潮流，我将持续维护本文档的中文版，如果你喜欢这个译本，也请给个 Star ~~
 
+PS: 只要本人依然从事移动端开发，这个文档将会持续更新，所以 fork 后很快就会落伍,建议 watch + star
+
 
 # [iOS 开发的最佳实践](./iOS-Good-Practices.md)
 
@@ -32,3 +34,4 @@ iOS开发要上手比较困难，因为无论是 Objective-C 还是 Swift 在别
 [SwiftCommunity]: http://swift-lang.schwa.io/
 [SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
 [Author]: https://github.com/schwa
+
